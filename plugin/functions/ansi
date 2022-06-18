@@ -1,0 +1,14 @@
+local seq
+declare -a mycodes=("${!1}")
+
+debug "ansi: ${!1} all: $* aka ${mycodes[@]}"
+
+seq=""
+for ((i = 0; i < ${#mycodes[@]}; i++)); do
+    if [[ -n $seq ]]; then
+        seq="${seq};"
+    fi
+    seq="${seq}${mycodes[$i]}"
+done
+debug "ansi debug:" '\\[\\033['${seq}'m\\]'
+echo -ne '\[\033['${seq}'m\]'

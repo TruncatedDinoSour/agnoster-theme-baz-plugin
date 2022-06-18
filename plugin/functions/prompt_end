@@ -1,0 +1,7 @@
+if [[ -n $CURRENT_BG ]]; then
+    declare -a codes=($(text_effect reset) $(fg_color $CURRENT_BG))
+    PR="$PR $(ansi codes[@])$SEGMENT_SEPARATOR"
+fi
+declare -a reset=($(text_effect reset))
+PR="$PR $(ansi reset[@])"
+CURRENT_BG=''

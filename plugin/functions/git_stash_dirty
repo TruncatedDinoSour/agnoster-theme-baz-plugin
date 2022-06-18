@@ -1,0 +1,2 @@
+stash=$(git stash list 2> /dev/null | tail -n 1)
+[[ -n $stash ]] && echo " ⚑"

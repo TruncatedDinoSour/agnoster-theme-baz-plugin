@@ -1,0 +1,5 @@
+if [[ -n $VIRTUAL_ENV ]]; then
+    color=cyan
+    prompt_segment $color $PRIMARY_FG
+    prompt_segment $color white "$(basename $VIRTUAL_ENV)"
+fi

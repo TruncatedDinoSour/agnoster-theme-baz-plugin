@@ -1,0 +1,31 @@
+local bg fg
+declare -a codes
+
+debug "Prompting $1 $2 $3"
+
+codes=("${codes[@]}" $(text_effect reset))
+if [[ -n $1 ]]; then
+    bg=$(bg_color $1)
+    codes=("${codes[@]}" $bg)
+    debug "Added $bg as background to codes"
+fi
+if [[ -n $2 ]]; then
+    fg=$(fg_color $2)
+    codes=("${codes[@]}" $fg)
+    debug "Added $fg as foreground to codes"
+fi
+
+debug "Codes: "
+
+if [[ $CURRENT_BG != NONE && $1 != $CURRENT_BG ]]; then
+    declare -a intermediate=($(fg_color $CURRENT_BG) $(bg_color $1))
+    debug "pre prompt " $(ansi intermediate[@])
+    PR="$PR $(ansi intermediate[@])$SEGMENT_SEPARATOR"
+    debug "post prompt " $(ansi codes[@])
+    PR="$PR$(ansi codes[@]) "
+else
+    debug "no current BG, codes is $codes[@]"
+    PR="$PR$(ansi codes[@]) "
+fi
+CURRENT_BG=$1
+[[ -n $3 ]] && PR="$PR$3"

@@ -1,0 +1,11 @@
+case "$1" in
+    black)      echo 40;;
+    red)        echo 41;;
+    green)      echo 42;;
+    yellow)     echo 43;;
+    blue)       echo 44;;
+    magenta)    echo 45;;
+    cyan)       echo 46;;
+    white)      echo 47;;
+    orange)     echo 48\;5\;166;;
+esac

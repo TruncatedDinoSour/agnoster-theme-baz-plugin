@@ -1,0 +1,5 @@
+case "$1" in
+   reset)      echo 0;;
+   bold)       echo 1;;
+   underline)  echo 4;;
+esac

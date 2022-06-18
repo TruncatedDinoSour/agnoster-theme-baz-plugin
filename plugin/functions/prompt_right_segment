@@ -1,0 +1,29 @@
+local bg fg
+declare -a codes
+
+debug "Prompt right"
+debug "Prompting $1 $2 $3"
+
+codes=("${codes[@]}" $(text_effect reset))
+if [[ -n $1 ]]; then
+    bg=$(bg_color $1)
+    codes=("${codes[@]}" $bg)
+    debug "Added $bg as background to codes"
+fi
+if [[ -n $2 ]]; then
+    fg=$(fg_color $2)
+    codes=("${codes[@]}" $fg)
+    debug "Added $fg as foreground to codes"
+fi
+
+debug "Right Codes: "
+
+declare -a intermediate2=($(fg_color $1) $(bg_color $CURRENT_RBG) )
+
+debug "pre prompt " $(ansi_r intermediate2[@])
+PRIGHT="$PRIGHT$(ansi_r intermediate2[@])$RIGHT_SEPARATOR"
+debug "post prompt " $(ansi_r codes[@])
+PRIGHT="$PRIGHT$(ansi_r codes[@]) "
+
+CURRENT_RBG=$1
+[[ -n $3 ]] && PRIGHT="$PRIGHT$3"
